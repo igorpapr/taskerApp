@@ -23,7 +23,7 @@ export default function Home({navigation, route}){
                 } catch (e) {
                     console.log(`Failed to restore token: ${e}`)
                 }
-            fetch("http://192.168.1.4:8080/api/tasks", 
+            fetch("https://taskerappbc.herokuapp.com/api/tasks",                    //"http://192.168.1.4:8080/api/tasks", 
             {
                 method: 'get',
                 headers: new Headers({
@@ -32,7 +32,10 @@ export default function Home({navigation, route}){
             })
             .then((res) => res.json())
             .then(res => setTasks(res))
-            .catch((error) => {console.log(error)});
+            .catch((error) => {
+                console.log(error);
+                setTasks([]);
+            });
         }
         getData();
     },[toLoad]);
@@ -47,7 +50,7 @@ export default function Home({navigation, route}){
                 } catch (e) {
                     console.log(`Failed to restore token: ${e}`)
                 }
-                fetch("http://192.168.1.4:8080/api/tasks", 
+                fetch("https://taskerappbc.herokuapp.com/api/tasks", //"http://192.168.1.4:8080/api/tasks", 
                 {
                     method: 'post',
                     headers: new Headers({ // eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOiI0ZDM1OTljZS01ZWNkLTQ2OGEtYmZhYS0xNjNlMzBiYzhmNGUiLCJlbWFpbCI6InRlc3RtYWlsQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiTkVXVEVTVCIsImlhdCI6MTU4ODYxNTUzMywiZXhwIjoxNTg4OTE1NTMzfQ.psNY86SijXF0SzV_U-mEwObO_yEE0PgAVuVh-uILjnJUyMIpPAKi2-dhyiHefMUZg3CpCrFo-675fDbAHIw7Mg

@@ -1,9 +1,12 @@
 import * as React from 'react';
-import {AsyncStorage, Button, Text, TextInput, View, Alert} from 'react-native';
+import {AsyncStorage, StyleSheet, Button, Text, TextInput, View, Alert} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import TaskDetails from './screens/taskdetails';
 import Home from './screens/home';
+import {YellowBox} from 'react-native';
+YellowBox.ignoreWarnings(['Require cycle:']);
+
 
 export const AuthContext = React.createContext();
 
@@ -17,24 +20,29 @@ function SignInScreen() {
     if (username.length > 3 && password.length > 3){
       signIn({ username, password });
     }else{
-      Alert.alert("Username or password is too short!");
+      Alert.alert("Username or password is incorrect!");
     }
   }
 
   return (
-    <View>
+    <View style = {styles.login}>
       <TextInput
+        style = {styles.loginField}
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
+        style = {styles.loginField}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Sign in" onPress={submit} />
+      <Button 
+      style={styles.btn}
+      title="Sign in" 
+      onPress={submit} />
     </View>
   );
 }
@@ -52,7 +60,6 @@ const Stack = createStackNavigator();
 
 
 export default function App({ navigation }) {
-
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -102,7 +109,7 @@ export default function App({ navigation }) {
     () => ({
       signIn: async data => {
         try{
-          let response = await fetch("http://192.168.1.4:8080/api/auth/login", 
+          let response = await fetch( "https://taskerappbc.herokuapp.com/api/auth/login",//"http://192.168.1.4:8080/api/auth/login", 
           {
               method: 'post',
               headers: new Headers({
@@ -143,24 +150,20 @@ export default function App({ navigation }) {
               options={{
                 title: 'Sign in',
                 animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-              }}
-            />
+              }}/>
           ) : (
-            <>
-            <Stack.Screen 
-              name="Home"  
-              component= {Home}
-              options={{
-                  title: 'My Tasks'
-              }}
-              />
+            <><Stack.Screen 
+                name="Home"  
+                component= {Home}
+                options={{
+                title: 'My Tasks'
+              }}/>
             <Stack.Screen 
               name="TaskDetails"  
               component= {TaskDetails}
               options={{
                   title: 'Task Details'
-              }}
-              />
+              }}/>
             </>
           )}
         </Stack.Navigator>
@@ -168,3 +171,25 @@ export default function App({ navigation }) {
     </AuthContext.Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  login: {
+    flex: 1,
+    fontSize: 25,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 15
+  },
+  loginField: {
+    borderColor: '#8420CE',
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+    borderRadius: 10
+  },
+  btn: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: '#8420CE'
+  }
+});
