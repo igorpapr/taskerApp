@@ -23,7 +23,7 @@ export default function Home({navigation, route}){
                 } catch (e) {
                     console.log(`Failed to restore token: ${e}`)
                 }
-            fetch("https://taskerappbc.herokuapp.com/api/tasks",                    //"http://192.168.1.4:8080/api/tasks", 
+            fetch("https://taskerappbc.herokuapp.com/api/tasks",
             {
                 method: 'get',
                 headers: new Headers({
@@ -50,10 +50,10 @@ export default function Home({navigation, route}){
                 } catch (e) {
                     console.log(`Failed to restore token: ${e}`)
                 }
-                fetch("https://taskerappbc.herokuapp.com/api/tasks", //"http://192.168.1.4:8080/api/tasks", 
+                fetch("https://taskerappbc.herokuapp.com/api/tasks", 
                 {
                     method: 'post',
-                    headers: new Headers({ // eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOiI0ZDM1OTljZS01ZWNkLTQ2OGEtYmZhYS0xNjNlMzBiYzhmNGUiLCJlbWFpbCI6InRlc3RtYWlsQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiTkVXVEVTVCIsImlhdCI6MTU4ODYxNTUzMywiZXhwIjoxNTg4OTE1NTMzfQ.psNY86SijXF0SzV_U-mEwObO_yEE0PgAVuVh-uILjnJUyMIpPAKi2-dhyiHefMUZg3CpCrFo-675fDbAHIw7Mg
+                    headers: new Headers({ 
                         'Content-Type':'application/json',
                         'Authorization': 'Bearer ' + userToken
                     }),

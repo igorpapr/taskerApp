@@ -109,7 +109,7 @@ export default function App({ navigation }) {
     () => ({
       signIn: async data => {
         try{
-          let response = await fetch( "https://taskerappbc.herokuapp.com/api/auth/login",//"http://192.168.1.4:8080/api/auth/login", 
+          let response = await fetch( "https://taskerappbc.herokuapp.com/api/auth/login",
           {
               method: 'post',
               headers: new Headers({
